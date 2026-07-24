@@ -14,9 +14,8 @@
   --dd-purple:  #b45ce0;
   --dd-indigo:  #6a5cf0;
   --dd-sheet:   #fffdf6;  /* whiter than the page — a fresh sheet      */
+  --dd-banner:  #fdfbf2;  /* the paper baked into assets/banner.png    */
   --dd-ink:     #2b2a33;  /* the marker outline colour                 */
-  --dd-rule:    rgba(84, 118, 178, 0.22);   /* ruled blue lines        */
-  --dd-margin:  rgba(224, 69, 123, 0.5);    /* red margin rule         */
   --dd-faint:   rgba(43, 42, 51, 0.60);
   --dd-shadow:  4px 4px 0 rgba(43, 42, 51, 0.16);
   --dd-shadow-lg: 7px 8px 0 rgba(43, 42, 51, 0.15);
@@ -73,7 +72,10 @@
 .dd-lead--center { margin-left: auto; margin-right: auto; text-align: center; }
 
 /* ==========================================================================
-   HERO — the swarm
+   HERO — the hand-drawn banner
+   The banner is the sheet: it carries its own ruled lines, red margin rule
+   and the whole cast, so the card behind it is plain paper in the banner's
+   own cream (--dd-banner) and the seam under the art is invisible.
    ========================================================================== */
 .dd-hero {
   position: relative;
@@ -81,86 +83,47 @@
   margin-top: 14px;
   border: 2.5px solid var(--dd-ink);
   border-radius: 20px;
-  background-color: var(--dd-sheet);
-  background-image: repeating-linear-gradient(
-    to bottom, transparent 0 38px, var(--dd-rule) 38px 40px);
+  background: var(--dd-banner);
   box-shadow: var(--dd-shadow-lg);
-  padding: 40px 26px 34px;
   text-align: center;
 }
-/* red margin rule, like real ruled paper */
-.dd-hero__rule {
-  position: absolute;
-  top: 0; bottom: 0; left: 56px;
-  width: 2px;
-  background: var(--dd-margin);
-  z-index: 1;
-}
-
-/* the swarm layer */
-.dd-swarm { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-.dd-bug {
-  position: absolute;
-  width: var(--sz, 60px);
-  transform: translate(0, 0) rotate(var(--r0, 0deg));
-  animation: dd-drift var(--dur, 7s) ease-in-out var(--delay, 0s) infinite alternate;
-  filter: drop-shadow(2px 3px 0 rgba(43, 42, 51, 0.12));
-  opacity: 0.94;
-}
-.dd-bug img { width: 100%; height: auto; display: block; }
-@keyframes dd-drift {
-  from { transform: translate(0, 0) rotate(var(--r0, 0deg)); }
-  to   { transform: translate(var(--tx, 8px), var(--ty, -8px)) rotate(var(--r1, 6deg)); }
-}
-
-/* hero content sits above the swarm, lifted off it by a soft paper glow */
-.dd-hero__inner {
-  position: relative;
-  z-index: 3;
-  max-width: 620px;
-  margin: 0 auto;
-}
-.dd-hero__inner::before {
+/* carry the banner's red margin rule on down the rest of the card, so the
+   hero reads as one continuous sheet rather than art stacked on a box.
+   6.49% / #eca9ad are measured off assets/banner.png. */
+.dd-hero::before {
   content: "";
   position: absolute;
-  inset: -6% -12%;
-  z-index: -1;
-  background: radial-gradient(ellipse 62% 70% at 50% 46%,
-              var(--dd-sheet) 42%, rgba(255, 253, 246, 0.72) 62%, transparent 82%);
+  top: 0; bottom: 0; left: 6.49%;
+  width: 0.132%;          /* 2.7px of the 2048px-wide banner, so the stroke
+                             stays the same weight as the drawn one */
+  background: #eca9ad;
+  z-index: 0;
 }
-.dd-hero__title {
-  width: min(560px, 92%);
-  margin: 0 auto 2px;
-  filter: drop-shadow(3px 4px 0 rgba(43, 42, 51, 0.10));
+.dd-hero__banner { position: relative; z-index: 1; margin: 0; line-height: 0; }
+/* the art sits between 22% and 77% of the file's height — crop the dead paper
+   off the top and bottom (leaving a margin) rather than re-exporting the png */
+.dd-hero__banner img {
+  width: 100%;
+  aspect-ratio: 2048 / 745;
+  object-fit: cover;
+  object-position: 50% 48%;
+}
+
+.dd-hero__inner {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 6px 26px 32px;
 }
 .dd-hero__tag {
   font-family: var(--hand);
   font-size: clamp(19px, 3vw, 24px);
   color: var(--dd-faint);
-  margin: 0 0 6px;
-}
-.dd-hero__stage { position: relative; display: inline-block; margin: 2px auto 6px; }
-.dd-hero__aura {
-  position: absolute; inset: -22% -20%;
-  border: 3px dashed rgba(43, 42, 51, 0.26);
-  border-radius: 50%;
-  animation: dd-spin 44s linear infinite;
-}
-.dd-hero__mascot {
-  position: relative; z-index: 1;
-  width: clamp(116px, 20vw, 158px);
-  filter: drop-shadow(3px 5px 0 rgba(43, 42, 51, 0.16));
-  animation: dd-bob 4.6s ease-in-out infinite;
-}
-@keyframes dd-spin { to { transform: rotate(360deg); } }
-@keyframes dd-bob {
-  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
-  50%      { transform: translateY(-7px) rotate(1.5deg); }
+  margin: 0 0 10px;
 }
 .dd-hero__hook {
   font-size: clamp(17px, 2.4vw, 20px);
   max-width: 46ch;
-  margin: 4px auto 0;
+  margin: 0 auto;
   color: var(--dd-ink);
 }
 .dd-hero__hook strong { color: var(--blue); }
@@ -236,22 +199,30 @@
 }
 .dd-step__shot img { width: 100%; display: block; }
 
-/* wider layout: number | text | phone thumbnail on the right */
+/* wider layout: the shot is real game footage, so give it enough width to
+   actually read, and alternate sides so four steps don't march in lockstep */
 @media (min-width: 720px) {
   .dd-step {
-    grid-template-columns: auto minmax(0, 1fr) 150px;
+    grid-template-columns: auto minmax(0, 1fr) 260px;
     align-items: center;
-    padding: 22px 26px;
+    padding: 26px 30px;
+    gap: 18px 28px;
   }
-  .dd-step__shot { grid-column: auto; max-width: 150px; justify-self: end; }
+  .dd-step__shot { grid-column: 3; max-width: 260px; justify-self: end; }
+
+  .dd-step:nth-child(even) { grid-template-columns: 260px auto minmax(0, 1fr); }
+  .dd-step:nth-child(even) .dd-step__shot { grid-column: 1; justify-self: start; transform: rotate(1deg); }
+  .dd-step:nth-child(even) .dd-step__no   { grid-column: 2; }
+  .dd-step:nth-child(even) .dd-step__body { grid-column: 3; }
 }
 
 /* ==========================================================================
    CAST — meet the doodles
    ========================================================================== */
+/* nine doodles — a deliberate 3x3, not an auto-fill that orphans a row of 3 */
 .dd-cast {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   margin-top: 26px;
 }
@@ -282,6 +253,15 @@
   margin: 0 0 3px;
 }
 .dd-doodle__tag { font-size: 14px; line-height: 1.4; color: var(--dd-faint); margin: 0; }
+/* three across means wider cards — scale the doodle up to fill them */
+@media (min-width: 720px) {
+  .dd-cast { gap: 20px; }
+  .dd-doodle { padding: 22px 20px 20px; }
+  .dd-doodle__art { height: 132px; margin-bottom: 15px; }
+  .dd-doodle__art img { max-height: 132px; }
+  .dd-doodle__name { font-size: 28px; }
+  .dd-doodle__tag { font-size: 15.5px; }
+}
 .dd-doodle__flag {
   display: inline-block;
   font-family: var(--hand);
@@ -328,7 +308,12 @@
 .dd-boss__title {
   font-family: var(--hand);
   font-weight: 400;
-  font-size: clamp(44px, 9vw, 92px);
+  /* no floor: a clamp() minimum bigger than the viewport can carry wraps the
+     line and orphans the trailing skull. 9.5vw keeps ~12% slack against the
+     measured width of the whole string at every size from 320px up, so it
+     stays on one line and the skulls keep flanking it. */
+  font-size: min(9.5vw, 92px);
+  white-space: nowrap;
   line-height: 0.94;
   color: var(--dd-red);
   text-align: center;
@@ -389,6 +374,10 @@
   border-bottom: 1.5px dashed rgba(43, 42, 51, 0.18);
 }
 .dd-check li:last-child { border-bottom: 0; }
+/* the one paid line: a pencil in pink, not a green tick — a checkmark next to
+   a price reads as an endorsement in a list whose whole point is candour */
+.dd-check li.is-paid { border-top: 1.5px solid rgba(43, 42, 51, 0.18); margin-top: 4px; }
+.dd-check li.is-paid .dd-check__mark { font-family: var(--hand); color: var(--pink); }
 .dd-check__mark {
   font-family: var(--dd-body);
   font-weight: 900;
@@ -433,7 +422,6 @@
 .dd-js .dd-reveal.is-in { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
-  .dd-bug, .dd-hero__mascot, .dd-hero__aura { animation: none !important; }
   .dd-js .dd-reveal { opacity: 1; transform: none; transition: none; }
 }
 
@@ -442,16 +430,17 @@
    ========================================================================== */
 @media (max-width: 680px) {
   .dd-wrap { padding: 6px 16px 34px; }
-  .dd-hero__rule { display: none; }
-  .dd-hero { padding: 30px 16px 28px; border-radius: 16px; }
-  /* thin the swarm on small screens so text stays clear */
-  .dd-bug[data-opt] { display: none; }
+  .dd-hero { border-radius: 16px; }
+  .dd-hero__inner { padding: 10px 16px 26px; }
   .dd-section { margin-top: 62px; }
   .dd-boss { padding: 74px 18px 78px; }
 }
-/* force two shrink-to-fit cast columns so the grid never overflows a small phone */
+/* force two shrink-to-fit cast columns so the grid never overflows a small phone.
+   nine into two leaves a trailing card — span it so it reads as the end of the
+   list rather than an orphan. */
 @media (max-width: 520px) {
   .dd-cast { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .dd-doodle:last-child { grid-column: 1 / -1; }
 }
 @media (max-width: 420px) {
   .dd-doodle__art { height: 82px; }
