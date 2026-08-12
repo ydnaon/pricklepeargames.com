@@ -87,26 +87,20 @@
   box-shadow: var(--dd-shadow-lg);
   text-align: center;
 }
-/* carry the banner's red margin rule on down the rest of the card, so the
-   hero reads as one continuous sheet rather than art stacked on a box.
-   6.49% / #eca9ad are measured off assets/banner.png. */
-.dd-hero::before {
-  content: "";
-  position: absolute;
-  top: 0; bottom: 0; left: 6.49%;
-  width: 0.132%;          /* 2.7px of the 2048px-wide banner, so the stroke
-                             stays the same weight as the drawn one */
-  background: #eca9ad;
-  z-index: 0;
-}
 .dd-hero__banner { position: relative; z-index: 1; margin: 0; line-height: 0; }
 /* the art sits between 22% and 77% of the file's height — crop the dead paper
-   off the top and bottom (leaving a margin) rather than re-exporting the png */
+   off the top and bottom (leaving a margin) rather than re-exporting the png.
+   The bottom edge is feathered away with a mask instead of being cut straight
+   across, so the banner's ruled lines and drawn margin rule dissolve into the
+   card's plain paper rather than stopping at a hard seam. The card background
+   IS the banner's cream (--dd-banner), so what shows through the fade matches. */
 .dd-hero__banner img {
   width: 100%;
   aspect-ratio: 2048 / 745;
   object-fit: cover;
   object-position: 50% 48%;
+  -webkit-mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,0.6) 88%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,0.6) 88%, transparent 100%);
 }
 
 .dd-hero__inner {
