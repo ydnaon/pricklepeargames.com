@@ -46,14 +46,14 @@
     <div class="dd-hero__inner">
       <p class="dd-hero__hook">Join the fight to defend your notebook. <span class="danger">How long can you last?</span></p>
 
-      <!-- STORE BUTTONS — both stores are "coming soon" today (Play = closed testing, iOS = not yet submitted).
-           To go live, drop the `is-soon` class, add href, and swap the .small/.big text:
-             Google Play → https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender
-             App Store   → https://apps.apple.com/app/id<APPLE_ID>  (available once the App Store Connect record exists) -->
+      <!-- STORE BUTTONS — Google Play is live; iOS is not yet submitted.
+           To take the App Store live, swap its <span> for an <a href>, drop the `is-soon`
+           class and the aria-disabled, and change the .small line to "Download on the":
+             App Store → https://apps.apple.com/app/id<APPLE_ID>  (available once the App Store Connect record exists) -->
       <div class="stores">
-        <span class="btn-store is-soon" aria-disabled="true">
-          <span class="lines"><span class="small">Coming soon to</span><span class="big">Google Play</span></span>
-        </span>
+        <a class="btn-store" href="https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender">
+          <span class="lines"><span class="small">Get it on</span><span class="big">Google Play</span></span>
+        </a>
         <span class="btn-store is-soon" aria-disabled="true">
           <span class="lines"><span class="small">Coming soon to the</span><span class="big">App Store</span></span>
         </span>
@@ -66,7 +66,7 @@
         <span class="pill">No tracking</span>
         <span class="pill">Plays offline</span>
       </div>
-      <p class="stores-note">Currently in closed testing. Store links go live as the game launches.</p>
+      <p class="stores-note">Out now on Android. The App Store link goes live when the iOS build lands.</p>
     </div>
   </section>
 
