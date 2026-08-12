@@ -25,12 +25,9 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  /* plain paper — the ruled lines came off because the hero art carries its
+     own, at its own pitch, and the two never lined up */
   background: var(--paper);
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px, transparent 43px,
-    var(--line) 43px, var(--line) 45px
-  );
   color: var(--ink);
   font: 17px/1.6 var(--serif);
 }
