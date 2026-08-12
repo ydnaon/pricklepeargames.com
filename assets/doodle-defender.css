@@ -99,8 +99,12 @@
   aspect-ratio: 2048 / 745;
   object-fit: cover;
   object-position: 50% 48%;
-  -webkit-mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,0.6) 88%, transparent 100%);
-          mask-image: linear-gradient(to bottom, #000 74%, rgba(0,0,0,0.6) 88%, transparent 100%);
+  /* Fully opaque until 91%: the crowned doodle's frame ends at 86.3% of the
+     displayed crop and its drop shadow at 90.6% (measured off banner.png
+     through this same cover/object-position crop), so the fade must start
+     below both or it washes the character out. */
+  -webkit-mask-image: linear-gradient(to bottom, #000 91%, rgba(0,0,0,0.5) 96%, transparent 100%);
+          mask-image: linear-gradient(to bottom, #000 91%, rgba(0,0,0,0.5) 96%, transparent 100%);
 }
 
 .dd-hero__inner {
