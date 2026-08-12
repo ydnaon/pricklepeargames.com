@@ -88,7 +88,12 @@ h1 .accent, h2 .accent { color: var(--pink); }
 .studio-hero { text-align: center; padding: 30px 0 8px; }
 .studio-hero h1 { font-size: 54px; margin: 12px 0 2px; color: var(--ink); }
 .studio-hero .tag { color: var(--faint); margin: 0 0 14px; font-size: 18px; }
-.studio-hero .lede { max-width: 520px; margin: 0 auto; color: var(--ink); }
+
+/* brand attribution — closes the home page, just above the footer. Styled to
+   match the footer's own legal line so the two read as one quiet colophon
+   rather than as body copy stranded at the bottom. */
+.brand-note { text-align: center; color: var(--faint); font-size: 15px; margin: 46px 0 0; }
+.brand-note strong { color: var(--ink); font-weight: 400; }
 
 /* studio logo mark — the prickly pear (home hero).
    Sized to carry about the same visual weight as the 84px square doodle it
