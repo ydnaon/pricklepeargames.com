@@ -18,7 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=6">
+<link rel="stylesheet" href="assets/site.css?v=7">
 <link rel="stylesheet" href="assets/doodle-defender.css?v=3">
 </head>
 <body>
@@ -46,20 +46,19 @@
     <div class="dd-hero__inner">
       <p class="dd-hero__hook">Join the fight to defend your notebook. <span class="danger">How long can you last?</span></p>
 
-      <!-- STORE BUTTONS — Google Play is live and uses Google's official badge
-           artwork, unmodified (assets/badge-google-play.png). iOS is not yet
-           submitted, so the App Store keeps the muted hand-drawn placeholder —
-           Apple's own badge must not appear until the app is actually listed.
-           To take it live, swap the <span> for an <a href> carrying Apple's
-           official badge the same way:
-             App Store → https://apps.apple.com/app/id<APPLE_ID> -->
+      <!-- STORE BADGES — both stores are live, each using that store's own
+           official badge artwork, unmodified:
+             Google Play → assets/badge-google-play.png (Partner Marketing Hub)
+             App Store   → assets/badge-app-store.svg   (Apple black lockup, US/UK)
+           Never recolour, crop or rebuild either. They are sized by height in
+           site.css so the two sit level despite differing aspect ratios. -->
       <div class="stores">
         <a class="btn-badge" href="https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender">
           <img src="assets/badge-google-play.png" alt="Get it on Google Play" width="478" height="142">
         </a>
-        <span class="btn-store is-soon" aria-disabled="true">
-          <span class="lines"><span class="small">Coming soon to the</span><span class="big">App Store</span></span>
-        </span>
+        <a class="btn-badge" href="https://apps.apple.com/us/app/doodle-defenders/id6794894322">
+          <img src="assets/badge-app-store.svg" alt="Download on the App Store" width="120" height="40">
+        </a>
       </div>
 
       <div class="dd-trust">

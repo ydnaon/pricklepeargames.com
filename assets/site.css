@@ -166,37 +166,17 @@ h1 .accent, h2 .accent { color: var(--pink); }
   padding: 2px 14px; background: var(--cream);
 }
 
-/* ---- store buttons ------------------------------------------------------ */
+/* ---- store badges -------------------------------------------------------- */
 .stores { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: center; margin: 22px 0 6px; }
 
-/* Official Google Play badge. Google's artwork, used unmodified — never
-   recolour it, crop it or rebuild it. The PNG is trimmed to the pill with no
-   transparent margin of its own, so the clear space Google asks for comes from
-   the row gap and the margin here. Height matches .btn-store so the live badge
-   and the coming-soon button sit level. */
+/* The official Google Play and App Store badges, each used unmodified — never
+   recolour, crop or rebuild them. Neither file carries a transparent margin of
+   its own, so the clear space both owners ask for comes from the row gap.
+   Only the height is set: the two have different aspect ratios (3.37 vs 2.99),
+   so fixing the height keeps them level while the browser derives each width
+   from the artwork, which is what stops either being stretched. */
 .btn-badge { display: inline-flex; align-items: center; text-decoration: none; }
 .btn-badge img { display: block; height: 66px; width: auto; max-width: 100%; }
-.btn-store {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  min-width: 210px;
-  border: 2px solid var(--ink);
-  border-radius: 12px;
-  background: var(--cream);
-  box-shadow: var(--shadow);
-  padding: 10px 22px;
-  text-decoration: none;
-  color: var(--ink);
-}
-.btn-store .lines { display: flex; flex-direction: column; text-align: center; }
-.btn-store .small { font-size: 12px; color: var(--faint); letter-spacing: .04em; text-transform: uppercase; }
-.btn-store .big { font-family: var(--hand); font-size: 21px; line-height: 1.1; }
-/* muted "coming soon" state — not yet a link */
-.btn-store.is-soon { opacity: .72; cursor: default; box-shadow: 2px 2px 0 rgba(43,42,51,0.14); }
-.btn-store.is-soon .big { color: var(--faint); }
-.stores-note { text-align: center; color: var(--faint); font-size: 14px; margin: 4px 0 0; }
 
 /* ---- screenshots -------------------------------------------------------- */
 .shots {
@@ -279,10 +259,9 @@ h1 .accent, h2 .accent { color: var(--pink); }
   .studio-logo { height: 96px; }
   .nav { padding: 14px 18px; }
   .nav__links { font-size: 18px; gap: 14px; }
-  /* one store link per row at a matched width — the badge has a fixed aspect
-     ratio and can't share a row with the taller two-line button without one of
-     them looking stunted */
+  /* one badge per row, each scaled to the same width — matching widths reads as
+     a pair even though the two badges differ in aspect ratio */
   .stores { flex-direction: column; align-items: center; }
-  .btn-store, .btn-badge { width: 100%; max-width: 260px; min-width: 0; }
+  .btn-badge { width: 100%; max-width: 260px; }
   .btn-badge img { height: auto; width: 100%; }
 }
