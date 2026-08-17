@@ -133,7 +133,16 @@
   display: flex; flex-wrap: wrap; justify-content: center;
   gap: 8px; margin: 16px 0 2px;
 }
-.dd-trust .pill { background: var(--dd-sheet); }
+/* Uppercased here rather than typed in caps in the HTML, so assistive tech
+   still reads real words. Patrick Hand's caps sit tight, so they get a little
+   tracking and a nudge more side padding to keep the pills from looking
+   cramped. */
+.dd-trust .pill {
+  background: var(--dd-sheet);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 2px 16px;
+}
 
 /* ==========================================================================
    PITCH — what is this
