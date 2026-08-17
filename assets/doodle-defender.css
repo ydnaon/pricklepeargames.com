@@ -127,7 +127,7 @@
 .dd-hero__hook strong { color: var(--blue); }
 .dd-hero__hook .danger { color: var(--dd-red); font-weight: 800; white-space: nowrap; }
 
-/* store buttons + trust row (reuses .stores/.btn-store from site.css) */
+/* store badges + trust row (reuses .stores/.btn-badge from site.css) */
 .dd-hero .stores { margin-top: 22px; }
 .dd-trust {
   display: flex; flex-wrap: wrap; justify-content: center;

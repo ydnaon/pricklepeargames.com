@@ -167,16 +167,44 @@ h1 .accent, h2 .accent { color: var(--pink); }
 }
 
 /* ---- store badges -------------------------------------------------------- */
-.stores { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; align-items: center; margin: 22px 0 6px; }
+/* Official Google Play and App Store artwork, each used unmodified — never
+   recolour, crop, stretch or rebuild either one. Neither file carries a
+   transparent margin, so the clear space both owners require comes from the
+   row gap.
 
-/* The official Google Play and App Store badges, each used unmodified — never
-   recolour, crop or rebuild them. Neither file carries a transparent margin of
-   its own, so the clear space both owners ask for comes from the row gap.
-   Only the height is set: the two have different aspect ratios (3.37 vs 2.99),
-   so fixing the height keeps them level while the browser derives each width
-   from the artwork, which is what stops either being stretched. */
-.btn-badge { display: inline-flex; align-items: center; text-decoration: none; }
-.btn-badge img { display: block; height: 66px; width: auto; max-width: 100%; }
+   The two ship at different aspect ratios (Play 3.37:1, App Store 3.00:1), so
+   they can be matched on exactly one axis — never both, not without stretching
+   one, which both brand guides forbid. Match HEIGHT: level tops and bottoms
+   read as a matched pair, and it is the axis both guides size against. Pinning
+   width instead leaves the two black rectangles 13% different in height, which
+   just looks like a mistake.
+
+   Height is therefore the only dimension set, so the browser derives each width
+   from the artwork and neither badge can be distorted. One fluid value drives
+   both breakpoints; object-fit is the backstop if a narrow container ever
+   squeezes the box. */
+.stores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 16px;
+  justify-content: center;
+  align-items: center;
+  margin: 24px 0 6px;
+}
+.btn-badge {
+  --badge-h: clamp(44px, 12vw, 60px);
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+.btn-badge img {
+  display: block;
+  height: var(--badge-h);
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
 
 /* ---- screenshots -------------------------------------------------------- */
 .shots {
@@ -259,9 +287,8 @@ h1 .accent, h2 .accent { color: var(--pink); }
   .studio-logo { height: 96px; }
   .nav { padding: 14px 18px; }
   .nav__links { font-size: 18px; gap: 14px; }
-  /* one badge per row, each scaled to the same width — matching widths reads as
-     a pair even though the two badges differ in aspect ratio */
-  .stores { flex-direction: column; align-items: center; }
-  .btn-badge { width: 100%; max-width: 260px; }
-  .btn-badge img { height: auto; width: 100%; }
+  /* No badge override here on purpose. The old one pinned both badges to the
+     same width, which forced their heights apart. The fluid --badge-h above
+     already scales them down together, and flex-wrap stacks them if the pair
+     will not fit — height-matched either way. */
 }
