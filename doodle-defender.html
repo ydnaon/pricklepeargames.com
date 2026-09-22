@@ -6,6 +6,10 @@
 <title>Doodle Defenders — Prickle Pear Games</title>
 <meta name="description" content="Doodle Defenders is an action packed survival auto shooter — stay alive on a notebook page as a simple doodle. Free to try, $2.99 full game. No ads.">
 <link rel="canonical" href="https://pricklepeargames.com/doodle-defender">
+<!-- iOS Smart App Banner: Safari draws a native strip above the page with the
+     icon, the store rating and a Get button that opens the App Store directly.
+     Safari only; in-app browsers (Instagram, X, Reddit) don't show it. -->
+<meta name="apple-itunes-app" content="app-id=6794894322">
 <link rel="icon" type="image/png" href="assets/favicon-pear.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
 <meta property="og:type" content="website">
@@ -15,11 +19,25 @@
 <meta property="og:url" content="https://pricklepeargames.com/doodle-defender">
 <meta property="og:image" content="https://pricklepeargames.com/assets/og-image.png?v=2">
 <meta name="twitter:card" content="summary_large_image">
+<!-- Platform flag for the store buttons (see .stores in site.css). Runs before
+     first paint so the visitor's own store never flashes in as the second
+     badge. Desktop, unknown UA or JS off: the attribute stays unset and both
+     official badges sit side by side. iPadOS reports itself as a Mac, hence
+     the touch-points check; Android goes first so a touch device that still
+     reports a Mac platform (emulators, dev tools) can't trip that check. -->
+<script>
+(function () {
+  var ua = navigator.userAgent, p = '';
+  if (/Android/.test(ua)) p = 'android';
+  else if (/iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) p = 'ios';
+  if (p) document.documentElement.setAttribute('data-platform', p);
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
-<link rel="stylesheet" href="assets/doodle-defender.css?v=4">
+<link rel="stylesheet" href="assets/site.css?v=9">
+<link rel="stylesheet" href="assets/doodle-defender.css?v=5">
 </head>
 <body>
 
@@ -44,30 +62,109 @@
     </h1>
 
     <div class="dd-hero__inner">
-      <p class="dd-hero__hook">Join the fight to defend your notebook. <span class="danger">How long can you last?</span></p>
+      <p class="dd-hero__tag">a paper style survivors game</p>
+
+      <p class="dd-hero__hook"><span class="danger">How long can you last?</span></p>
 
       <!-- STORE BADGES — both stores are live, each using that store's own
            official badge artwork, unmodified:
              Google Play → assets/badge-google-play.png (Partner Marketing Hub)
              App Store   → assets/badge-app-store.svg   (Apple black lockup, US/UK)
            Never recolour, crop or rebuild either. They are sized by height in
-           site.css so the two sit level despite differing aspect ratios. -->
+           site.css so the two sit level despite differing aspect ratios.
+
+           On a phone, site.css promotes the visitor's own store to one big
+           badge and folds the other down to its .btn-badge__alt text link.
+
+           Attribution, with no script on the site:
+             Google Play — the `referrer` UTM shows in Play Console under
+               Store performance → Tracked channels (UTM), as source
+               pricklepeargames.com / campaign game-page.
+             App Store   — needs a campaign link, which App Store Connect
+               generates (Analytics → Acquisition → Campaigns) in the form
+               https://apps.apple.com/app/apple-store/id6794894322?pt=<TOKEN>&ct=game-page&mt=8
+               Paste it over both App Store hrefs on this page once you have
+               your provider token; the plain link works fine until then. -->
       <div class="stores">
-        <a class="btn-badge" href="https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender">
+        <a class="btn-badge" data-store="play" href="https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender&amp;referrer=utm_source%3Dpricklepeargames.com%26utm_medium%3Dweb%26utm_campaign%3Dgame-page">
           <img src="assets/badge-google-play.png" alt="Get it on Google Play" width="478" height="142">
+          <!-- COPY (yours to edit): shown instead of the badge on iPhones -->
+          <span class="btn-badge__alt">Also on Google Play</span>
         </a>
-        <a class="btn-badge" href="https://apps.apple.com/us/app/doodle-defenders/id6794894322">
+        <a class="btn-badge" data-store="ios" href="https://apps.apple.com/us/app/doodle-defenders/id6794894322">
           <img src="assets/badge-app-store.svg" alt="Download on the App Store" width="120" height="40">
+          <!-- COPY (yours to edit): shown instead of the badge on Android -->
+          <span class="btn-badge__alt">Also on the App Store</span>
         </a>
       </div>
 
-      <!-- Sentence case in the markup, uppercased in CSS — screen readers read
-           "Free to try" as words rather than spelling out F-R-E-E. -->
-      <div class="dd-trust">
-        <span class="pill">No ads</span>
-        <span class="pill">Free to try</span>
-        <span class="pill">Offline</span>
+      <!-- COPY (yours to edit): the "what's the catch" answer, sitting right
+           under the button. It replaced the No ads / Free to try / Offline
+           pills, so it has to carry all three points. Placeholder is lifted
+           from your Google Play listing so it's in your voice. -->
+      <p class="dd-offer">Free to download, no ads, works offline, with an optional one time purchase for the full game.</p>
+
+      <!-- Desktop only (CSS hides it on touch devices): a desktop visitor can't
+           install from here, so hand them the phone link. /get sends a phone
+           straight to its own store and tags the Play link campaign=qr, so
+           Play Console can tell scans from page taps. -->
+      <div class="dd-qr">
+        <img src="assets/qr-get.svg" alt="QR code for pricklepeargames.com/get" width="104" height="104">
+        <!-- COPY (yours to edit) -->
+        <span class="dd-qr__cap">Scan to install on your phone</span>
       </div>
+    </div>
+  </section>
+
+  <!-- ================= REVIEWS — straight from the store listings ==========
+       Every quote is a verbatim excerpt of a player review, one per reviewer,
+       all 5-star (hence the stars). Sources, so they're easy to re-check:
+         App Store   — 19 Aug 2026 (sunk more time), 17 Aug (build combos)
+         Google Play — 12 Aug (doom scrolling), 26 Aug (easy rec),
+                       13 Aug ($3), 13 Aug (addicting)
+       Kept to short lines so six fit a 2-up grid on a phone. Swap in better
+       ones as they land. No rating count yet: 5.0 from 3 and 5 ratings reads
+       weaker than the quotes do. Add a star line once it's past ~25. -->
+  <section class="dd-reviews" aria-label="Player reviews">
+    <figure class="dd-review">
+      <blockquote><p>“I have sunk more time into this game than I care to admit.”</p></blockquote>
+      <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>App Store review</span></figcaption>
+    </figure>
+    <figure class="dd-review">
+      <blockquote><p>“I find myself playing this game more often than doom scrolling on social media.”</p></blockquote>
+      <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>Google Play review</span></figcaption>
+    </figure>
+    <figure class="dd-review">
+      <blockquote><p>“No ads, truly optional one-time purchase, and lots of replayability makes this an easy rec”</p></blockquote>
+      <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>Google Play review</span></figcaption>
+    </figure>
+    <figure class="dd-review">
+      <blockquote><p>“Endless build combos, 1000s of unlock-able outfit combinations and fast paced excitement.”</p></blockquote>
+      <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>App Store review</span></figcaption>
+    </figure>
+    <figure class="dd-review">
+      <blockquote><p>“Well worth the $3 for the limitless mode”</p></blockquote>
+      <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>Google Play review</span></figcaption>
+    </figure>
+    <figure class="dd-review">
+      <blockquote><p>“An addicting game that always has something new to try!”</p></blockquote>
+      <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>Google Play review</span></figcaption>
+    </figure>
+  </section>
+
+  <!-- ================= FINAL CTA — the same buttons again, past the reviews -->
+  <section class="dd-cta dd-cta--end" aria-label="Get the game">
+    <!-- COPY (yours to edit): reuses the hero's own question for now. -->
+    <p class="dd-cta__ask">How long can you last?</p>
+    <div class="stores">
+      <a class="btn-badge" data-store="play" href="https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender&amp;referrer=utm_source%3Dpricklepeargames.com%26utm_medium%3Dweb%26utm_campaign%3Dgame-page">
+        <img src="assets/badge-google-play.png" alt="Get it on Google Play" width="478" height="142">
+        <span class="btn-badge__alt">Also on Google Play</span>
+      </a>
+      <a class="btn-badge" data-store="ios" href="https://apps.apple.com/us/app/doodle-defenders/id6794894322">
+        <img src="assets/badge-app-store.svg" alt="Download on the App Store" width="120" height="40">
+        <span class="btn-badge__alt">Also on the App Store</span>
+      </a>
     </div>
   </section>
 

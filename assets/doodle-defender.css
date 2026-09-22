@@ -431,6 +431,105 @@
 }
 .dd-cta .stores { margin-top: 20px; }
 
+/* offer line — the "what's the catch" answer, directly under the button. It
+   stands in for the old trust pills, so it reads at body size in plain ink
+   rather than as a faint footnote. */
+.dd-offer {
+  font-size: clamp(16px, 2.2vw, 17px);
+  line-height: 1.5;
+  color: var(--dd-ink);
+  max-width: 46ch;
+  margin: 16px auto 0;
+}
+/* /get fallback only */
+.dd-back { margin: 18px 0 0; font-family: var(--hand); font-size: 19px; }
+
+/* desktop-only QR. Hidden by default; shown only where there's a mouse and
+   room, i.e. a visitor who can't install from this device. The SVG is ink
+   modules on a transparent ground, so the cream box plus its padding is the
+   quiet zone a scanner needs. */
+.dd-qr { display: none; }
+@media (hover: hover) and (pointer: fine) and (min-width: 720px) {
+  .dd-qr {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 8px 16px 8px 8px;
+    border: 1.5px dashed rgba(43, 42, 51, 0.32);
+    border-radius: 12px;
+    background: var(--dd-sheet);
+    text-align: left;
+  }
+  .dd-qr img { width: 104px; height: 104px; flex: none; }
+  .dd-qr__cap {
+    font-family: var(--hand);
+    font-size: 20px;
+    line-height: 1.15;
+    color: var(--dd-ink);
+    max-width: 11ch;
+  }
+}
+
+/* ==========================================================================
+   REVIEWS — a wall of short player quotes, 2-up on a phone, 3-up wider
+   ========================================================================== */
+.dd-reviews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 26px;
+}
+.dd-review {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid var(--dd-ink);
+  border-radius: 14px;
+  background: var(--dd-sheet);
+  box-shadow: var(--dd-shadow);
+  padding: 14px 15px 12px;
+}
+/* the site's sticker tilt, kept slight so neighbours don't fight */
+.dd-review:nth-child(odd)  { transform: rotate(-0.6deg); }
+.dd-review:nth-child(even) { transform: rotate(0.6deg); }
+.dd-review blockquote { margin: 0; }
+.dd-review blockquote p { margin: 0; font-size: 15.5px; line-height: 1.5; }
+.dd-review figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  margin-top: 10px;
+  font-family: var(--hand);
+  font-size: 16px;
+  color: var(--dd-faint);
+}
+.dd-review__stars { color: var(--dd-gold); font-size: 14px; letter-spacing: 0.06em; }
+/* the narrowest phones: one column rather than 13-character lines */
+@media (max-width: 359px) {
+  .dd-reviews { grid-template-columns: 1fr; }
+}
+@media (min-width: 720px) {
+  .dd-reviews { grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 34px; }
+  .dd-review { padding: 20px 22px 16px; border-radius: 16px; }
+  .dd-review blockquote p { font-size: 17px; line-height: 1.55; }
+  .dd-review figcaption { font-size: 17px; margin-top: 14px; }
+  .dd-review__stars { font-size: 15px; }
+}
+
+/* final CTA, short-page variant: the hero's question again, then the buttons */
+.dd-cta--end { margin-top: 48px; }
+.dd-cta__ask {
+  font-family: var(--hand);
+  font-size: clamp(28px, 5vw, 38px);
+  line-height: 1.1;
+  color: var(--dd-red);
+  margin: 0;
+}
+.dd-cta--end .stores { margin-top: 16px; }
+
 /* ==========================================================================
    scroll-reveal + motion prefs
    ========================================================================== */
@@ -452,6 +551,8 @@
   .dd-hero__inner { padding: 10px 16px 26px; }
   .dd-section { margin-top: 62px; }
   .dd-boss { padding: 74px 18px 78px; }
+  .dd-reviews { margin-top: 22px; }
+  .dd-cta--end { margin-top: 40px; }
 }
 /* force two shrink-to-fit cast columns so the grid never overflows a small phone.
    nine into two leaves a trailing card — span it so it reads as the end of the

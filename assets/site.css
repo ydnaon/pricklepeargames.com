@@ -206,6 +206,37 @@ h1 .accent, h2 .accent { color: var(--pink); }
   object-fit: contain;
 }
 
+/* Platform-matched layout. An inline script in each page's <head> sets
+   html[data-platform="ios"|"android"] from the user agent. With it set, the
+   visitor's own store becomes the one big badge (ordered first, taller, with a
+   little padding to widen the tap target past the artwork) and the other store
+   folds down to a plain text link: its badge is hidden and its .btn-badge__alt
+   label shown, so the anchor's accessible name follows. Without the attribute
+   (desktop, unknown UA, JS off) none of this applies and both official badges
+   sit side by side as before. The badge artwork itself is still untouched —
+   only its height changes, which both brand guides allow. */
+.btn-badge__alt { display: none; }
+html[data-platform] .stores { flex-direction: column; gap: 12px; }
+html[data-platform="ios"]     .btn-badge[data-store="ios"],
+html[data-platform="android"] .btn-badge[data-store="play"] {
+  --badge-h: clamp(56px, 15vw, 66px);
+  order: -1;
+  padding: 4px 8px;
+}
+html[data-platform="ios"]     .btn-badge[data-store="play"],
+html[data-platform="android"] .btn-badge[data-store="ios"] {
+  font-family: var(--hand);
+  font-size: 18px;
+  color: var(--blue);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 8px 12px;          /* lifts the text link to a 44px+ tap height */
+}
+html[data-platform="ios"]     .btn-badge[data-store="play"] img,
+html[data-platform="android"] .btn-badge[data-store="ios"] img { display: none; }
+html[data-platform="ios"]     .btn-badge[data-store="play"] .btn-badge__alt,
+html[data-platform="android"] .btn-badge[data-store="ios"] .btn-badge__alt { display: inline; }
+
 /* ---- screenshots -------------------------------------------------------- */
 .shots {
   display: grid;

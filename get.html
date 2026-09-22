@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Doodle Defenders — Prickle Pear Games</title>
+<!-- /get is the platform-neutral install link: the QR code on the game page
+     points here, and it's safe to use anywhere else a single link has to
+     serve both stores (social posts, print). A phone is sent straight on to
+     its own store before this page paints; desktop, unknown UA or JS off
+     falls through to the badges below. Not a page anyone should find via
+     search, hence noindex. -->
+<meta name="robots" content="noindex">
+<meta name="apple-itunes-app" content="app-id=6794894322">
+<link rel="icon" type="image/png" href="assets/favicon-pear.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<!-- Same platform sniff as doodle-defender.html, plus the redirect. The Play
+     link carries campaign=qr so Play Console separates scans from page taps;
+     the App Store link takes a campaign token the same way (see the note on
+     the game page) once you have one. -->
+<script>
+(function () {
+  var ua = navigator.userAgent, p = '';
+  if (/Android/.test(ua)) p = 'android';
+  else if (/iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) p = 'ios';
+  if (!p) return;
+  document.documentElement.setAttribute('data-platform', p);
+  location.replace(p === 'ios'
+    ? 'https://apps.apple.com/us/app/doodle-defenders/id6794894322'
+    : 'https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender&referrer=utm_source%3Dpricklepeargames.com%26utm_medium%3Dweb%26utm_campaign%3Dqr');
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css?v=9">
+<link rel="stylesheet" href="assets/doodle-defender.css?v=5">
+</head>
+<body>
+
+<header>
+  <nav class="nav">
+    <a class="nav__brand" href="/"><img src="assets/logo-pear.png" alt="">Prickle Pear Games</a>
+    <div class="nav__links">
+      <a href="/">Games</a>
+      <a href="/support">Support</a>
+      <a href="/privacy">Privacy</a>
+    </div>
+  </nav>
+</header>
+
+<main class="dd-main">
+<div class="dd-wrap">
+
+  <section class="dd-hero" aria-labelledby="dd-title">
+    <h1 class="dd-hero__banner" id="dd-title">
+      <img src="assets/banner.png?v=2" alt="Doodle Defenders" width="2048" height="1000">
+    </h1>
+
+    <div class="dd-hero__inner">
+      <p class="dd-hero__tag">a paper style survivors game</p>
+
+      <div class="stores">
+        <a class="btn-badge" data-store="play" href="https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender&amp;referrer=utm_source%3Dpricklepeargames.com%26utm_medium%3Dweb%26utm_campaign%3Dqr">
+          <img src="assets/badge-google-play.png" alt="Get it on Google Play" width="478" height="142">
+          <span class="btn-badge__alt">Also on Google Play</span>
+        </a>
+        <a class="btn-badge" data-store="ios" href="https://apps.apple.com/us/app/doodle-defenders/id6794894322">
+          <img src="assets/badge-app-store.svg" alt="Download on the App Store" width="120" height="40">
+          <span class="btn-badge__alt">Also on the App Store</span>
+        </a>
+      </div>
+
+      <!-- COPY (yours to edit): same line as the game page -->
+      <p class="dd-offer">Free to download, no ads, works offline, with an optional one time purchase for the full game.</p>
+
+      <p class="dd-back"><a href="/doodle-defender">More about Doodle Defenders</a></p>
+    </div>
+  </section>
+
+</div><!-- /.dd-wrap -->
+</main>
+
+<footer class="site-footer">
+  <nav>
+    <a href="/">Home</a> · <a href="/doodle-defender">Doodle Defenders</a> · <a href="/support">Support</a> · <a href="/privacy">Privacy</a>
+  </nav>
+  <p class="legal">© 2026 Prickle Pear Software, LLC</p>
+</footer>
+
+</body>
+</html>
