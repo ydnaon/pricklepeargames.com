@@ -14,7 +14,7 @@
   --dd-purple:  #b45ce0;
   --dd-indigo:  #6a5cf0;
   --dd-sheet:   #fffdf6;  /* whiter than the page — a fresh sheet      */
-  --dd-banner:  #fdfbf2;  /* the paper baked into assets/banner.png    */
+  --dd-banner:  #fdfbf2;  /* the hero card's paper, under the banner   */
   --dd-ink:     #2b2a33;  /* the marker outline colour                 */
   --dd-faint:   rgba(43, 42, 51, 0.60);
   --dd-shadow:  4px 4px 0 rgba(43, 42, 51, 0.16);
@@ -73,9 +73,10 @@
 
 /* ==========================================================================
    HERO — the hand-drawn banner
-   The banner is the sheet: it carries its own ruled lines, red margin rule
-   and the whole cast, so the card behind it is plain paper in the banner's
-   own cream (--dd-banner) and the seam under the art is invisible.
+   The swarm frames the art. The card's border clips it on the top, left and
+   right, as if the swarm carries on past the card's edges; along the bottom
+   the enemies are whole, on a transparent background, so they spill out onto
+   the card's cream paper (--dd-banner) below.
    ========================================================================== */
 .dd-hero {
   position: relative;
@@ -87,25 +88,14 @@
   box-shadow: var(--dd-shadow-lg);
   text-align: center;
 }
-.dd-hero__banner { position: relative; z-index: 1; margin: 0; line-height: 0; }
-/* the art sits between 22% and 77% of the file's height — crop the dead paper
-   off the top and bottom (leaving a margin) rather than re-exporting the png.
-   The bottom edge is feathered away with a mask instead of being cut straight
-   across, so the banner's ruled lines and drawn margin rule dissolve into the
-   card's plain paper rather than stopping at a hard seam. The card background
-   IS the banner's cream (--dd-banner), so what shows through the fade matches. */
-.dd-hero__banner img {
-  width: 100%;
-  aspect-ratio: 2048 / 745;
-  object-fit: cover;
-  object-position: 50% 48%;
-  /* Fully opaque until 91%: the crowned doodle's frame ends at 86.3% of the
-     displayed crop and its drop shadow at 90.6% (measured off banner.png
-     through this same cover/object-position crop), so the fade must start
-     below both or it washes the character out. */
-  -webkit-mask-image: linear-gradient(to bottom, #000 91%, rgba(0,0,0,0.5) 96%, transparent 100%);
-          mask-image: linear-gradient(to bottom, #000 91%, rgba(0,0,0,0.5) 96%, transparent 100%);
-}
+/* The top row of enemies is whole in the art too, with gaps between them that
+   reach at most 2% of its width down from its top edge (measured off
+   banner.avif and banner.png). Lifting the art 2%, plus a pixel of slack for
+   scaling, tucks every gap up under the top border, where the card clips it,
+   so the top edge reads as a solid band of swarm like the sides. Percentages
+   are of the card's width, which is the art's width, so it holds at any size. */
+.dd-hero__banner { position: relative; z-index: 1; margin: calc(-2% - 1px) 0 0; line-height: 0; }
+.dd-hero__banner img { width: 100%; }
 
 .dd-hero__inner {
   max-width: 620px;
