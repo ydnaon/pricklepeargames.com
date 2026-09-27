@@ -471,6 +471,7 @@
   margin-top: 26px;
 }
 .dd-review {
+  position: relative;
   margin: 0;
   display: flex;
   flex-direction: column;
@@ -497,6 +498,31 @@
   color: var(--dd-faint);
 }
 .dd-review__stars { color: var(--dd-gold); font-size: 14px; letter-spacing: 0.06em; }
+/* Two of the cards have a visitor from the swarm (assets/enemy-*.png). Two of
+   six, not all, so they read as placed by hand and the quotes stay the point.
+   On the first card one peeks over the top edge from behind: .dd-peek shows
+   only the top of it, cut off at the card's outer edge (100% is the inside of
+   the 2px border), so the card seems to hide the rest. On the last card one
+   clings to the bottom right corner, in front. */
+.dd-peek {
+  position: absolute;
+  right: 16px;
+  bottom: calc(100% + 2px);
+  width: 34px;
+  height: 19px;
+  overflow: hidden;
+  pointer-events: none;
+}
+.dd-peek img { width: 100%; }
+/* a loose enemy, here and in the final CTA. Decorative only (alt="" and
+   aria-hidden), and pointer-events off so one can never block a tap. */
+.dd-enemy {
+  position: absolute;
+  height: auto;
+  pointer-events: none;
+  filter: drop-shadow(2px 3px 0 rgba(43, 42, 51, 0.16));
+}
+.dd-enemy--cling { right: -11px; bottom: -14px; width: 32px; transform: rotate(14deg); }
 /* the narrowest phones: one column rather than 13-character lines */
 @media (max-width: 359px) {
   .dd-reviews { grid-template-columns: 1fr; }
@@ -507,10 +533,12 @@
   .dd-review blockquote p { font-size: 17px; line-height: 1.55; }
   .dd-review figcaption { font-size: 17px; margin-top: 14px; }
   .dd-review__stars { font-size: 15px; }
+  .dd-peek { right: 22px; width: 46px; height: 25px; }
+  .dd-enemy--cling { right: -17px; bottom: -19px; width: 44px; }
 }
 
 /* final CTA, short-page variant: the hero's question again, then the buttons */
-.dd-cta--end { margin-top: 48px; }
+.dd-cta--end { position: relative; margin-top: 48px; }
 .dd-cta__ask {
   font-family: var(--hand);
   font-size: clamp(28px, 5vw, 38px);
@@ -519,6 +547,35 @@
   margin: 0;
 }
 .dd-cta--end .stores { margin-top: 16px; }
+
+/* ...and the swarm closing in on it. On a phone there's no room beside the
+   question, so a few creep in from the screen's edges, partly off the page
+   (.dd-main clips the overflow). Wider, a pack comes in from each side, the
+   lead one nearest the buttons. The packs are placed from the centre so they
+   keep the same distance from the store badges at any width: side by side
+   the badges are 398px wide at their 60px desktop height, and the nearest
+   enemy stays 36px beyond that, well clear of the space both stores ask for
+   around their badges. */
+.dd-closing { position: absolute; inset: 0; pointer-events: none; }
+.dd-enemy--l1 { left: -26px;  top: -2%; width: 46px; transform: rotate(-8deg); }
+.dd-enemy--l2 { left: -8px;   top: 60%; width: 34px; transform: rotate(14deg); }
+.dd-enemy--r1 { right: -24px; top: 34%; width: 44px; transform: rotate(10deg); }
+.dd-enemy--r2 { right: -6px;  top: 82%; width: 30px; transform: rotate(-16deg); }
+.dd-enemy--l3, .dd-enemy--r3 { display: none; }
+/* no platform flag (a narrow desktop window, or JS off) means both badges sit
+   side by side across nearly the whole width, leaving the swarm no room that
+   isn't crowding them, so it sits this one out */
+@media (max-width: 719px) {
+  html:not([data-platform]) .dd-closing { display: none; }
+}
+@media (min-width: 720px) {
+  .dd-enemy--l1 { left: calc(50% - 295px);  top: 35px; width: 60px; }
+  .dd-enemy--l2 { left: calc(50% - 376px);  top: -2px; width: 42px; }
+  .dd-enemy--l3 { left: calc(50% - 427px);  top: 78px; width: 30px; transform: rotate(-22deg); display: block; }
+  .dd-enemy--r1 { right: calc(50% - 295px); top: 49px; width: 56px; }
+  .dd-enemy--r2 { right: calc(50% - 376px); top: 2px;  width: 38px; }
+  .dd-enemy--r3 { right: calc(50% - 427px); top: 82px; width: 28px; transform: rotate(24deg); display: block; }
+}
 
 /* ==========================================================================
    scroll-reveal + motion prefs

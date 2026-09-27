@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css?v=9">
-<link rel="stylesheet" href="assets/doodle-defender.css?v=6">
+<link rel="stylesheet" href="assets/doodle-defender.css?v=7">
 </head>
 <body>
 
@@ -130,6 +130,7 @@
        weaker than the quotes do. Add a star line once it's past ~25. -->
   <section class="dd-reviews" aria-label="Player reviews">
     <figure class="dd-review">
+      <span class="dd-peek" aria-hidden="true"><img src="assets/enemy-1.png" alt="" width="160" height="142"></span>
       <blockquote><p>“I have sunk more time into this game than I care to admit.”</p></blockquote>
       <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>App Store review</span></figcaption>
     </figure>
@@ -150,6 +151,7 @@
       <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>Google Play review</span></figcaption>
     </figure>
     <figure class="dd-review">
+      <img class="dd-enemy dd-enemy--cling" src="assets/enemy-2.png" alt="" aria-hidden="true" width="160" height="154">
       <blockquote><p>“An addicting game that always has something new to try!”</p></blockquote>
       <figcaption><span class="dd-review__stars" role="img" aria-label="Five stars">★★★★★</span><span>Google Play review</span></figcaption>
     </figure>
@@ -157,6 +159,15 @@
 
   <!-- ================= FINAL CTA — the same buttons again, past the reviews -->
   <section class="dd-cta dd-cta--end" aria-label="Get the game">
+    <!-- the swarm closing in on the question (decorative; placed in the CSS) -->
+    <div class="dd-closing" aria-hidden="true">
+      <img class="dd-enemy dd-enemy--l1" src="assets/enemy-1.png" alt="" width="160" height="142">
+      <img class="dd-enemy dd-enemy--l2" src="assets/enemy-3.png" alt="" width="160" height="157">
+      <img class="dd-enemy dd-enemy--l3" src="assets/enemy-2.png" alt="" width="160" height="154">
+      <img class="dd-enemy dd-enemy--r1" src="assets/enemy-2.png" alt="" width="160" height="154">
+      <img class="dd-enemy dd-enemy--r2" src="assets/enemy-1.png" alt="" width="160" height="142">
+      <img class="dd-enemy dd-enemy--r3" src="assets/enemy-3.png" alt="" width="160" height="157">
+    </div>
     <!-- COPY (yours to edit): reuses the hero's own question for now. -->
     <p class="dd-cta__ask">How long can you last?</p>
     <div class="stores">
