@@ -1,0 +1,119 @@
+/* Prickle Pear Games — the studio's own look (home page).
+   Everything comes from the pear mark: its lime, its near-black outline.
+   Game pages keep their own world (site.css + doodle-defender.css) and never
+   load this file, so nothing here can change them.
+
+   Kept deliberately plain to stay clear of the generated-site look: no boxed
+   hero, no outline or shadow on every container, no pills, no arrows on
+   buttons, no hover lifts. The only outlined boxes on the page are each
+   game's own key art and icon. */
+
+:root {
+  --pp-pear:   #8ec705;  /* sampled from logo-pear.png — fills and the sticker shadow, never text */
+  --pp-ground: #eef3da;  /* page ground, a pale wash of the pear (ink on it 16:1) */
+  --pp-ink:    #12170e;  /* the logo's outline */
+  --pp-muted:  #4a5240;  /* secondary text, 7.2:1 on the ground */
+  --pp-fruit:  #b3195e;  /* the prickly pear fruit — the one accent, 5.7:1 */
+  --pp-pad:    #1e3a2a;  /* cactus pad — the footer only */
+  --pp-sand:   #efe6d2;  /* text on the pad, 10:1 */
+
+  /* Fredoka stands in for hand lettering of the name and headings */
+  --pp-display: 'Fredoka', 'Nunito', system-ui, sans-serif;
+  --pp-body:    'Nunito', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--pp-ground);
+  color: var(--pp-ink);
+  font: 17px/1.6 var(--pp-body);
+}
+img { max-width: 100%; height: auto; display: block; }
+h1, h2, h3 { font-family: var(--pp-display); font-weight: 600; line-height: 1.04; margin: 0; }
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--pp-fruit); outline-offset: 3px; }
+
+/* ---- header: links only — the page below carries the name --------------- */
+.pp-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 24px;
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 24px 0;
+  font-family: var(--pp-display);
+  font-weight: 500;
+  font-size: 18px;
+}
+.pp-nav a { text-decoration: none; }
+.pp-nav a:hover { color: var(--pp-fruit); }
+
+.pp-page { flex: 1 0 auto; width: 100%; max-width: 1080px; margin: 0 auto; padding: 0 24px 88px; }
+
+/* ---- intro: the pear and the name, straight on the page, off-centre ------ */
+.pp-intro { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: end; gap: 8px 36px; padding: 18px 0 0 12px; }
+/* the source PNG is 358×498, so stay under ~250px tall to keep it sharp on 2x screens */
+.pp-intro__mark { height: 236px; width: auto; transform: rotate(-6deg); transform-origin: 50% 90%; }
+.pp-intro__words { padding-bottom: 22px; }
+.pp-intro h1 { font-size: clamp(46px, 8vw, 92px); letter-spacing: -0.015em; max-width: 9.5em; }
+.pp-intro__tag { margin: 12px 0 0; font-size: clamp(18px, 2.2vw, 21px); color: var(--pp-muted); }
+
+/* ---- games: each one is its own key art, plus plain text ----------------- */
+.pp-games-title { font-size: clamp(30px, 4.4vw, 42px); margin: 76px 0 30px 12px; }
+.pp-game { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 44px; align-items: center; }
+.pp-game + .pp-game { margin-top: 64px; }
+.pp-game__art {
+  display: block;
+  border: 3px solid var(--pp-ink);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fdfbf2;               /* the banner's own paper, under its transparent bottom edge */
+}
+.pp-game__art img { width: 100%; }
+.pp-game__body { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.pp-game__head { display: flex; align-items: center; gap: 16px; }
+.pp-game__icon { width: 72px; height: 72px; border-radius: 17px; border: 3px solid var(--pp-ink); flex: none; }
+.pp-game h3 { font-size: 32px; }
+.pp-game h3 a { text-decoration: none; }
+.pp-game h3 a:hover { color: var(--pp-fruit); }
+.pp-game p { margin: 0; }
+
+/* Official store badges, unmodified (see the note on .stores in site.css).
+   Matched by HEIGHT only, so neither artwork is ever distorted. */
+.pp-stores { display: flex; flex-wrap: wrap; gap: 12px 14px; align-items: center; margin-top: 6px; }
+.pp-stores img { height: 48px; width: auto; }
+
+/* ---- footer ------------------------------------------------------------- */
+.pp-footer { flex: none; background: var(--pp-pad); color: var(--pp-sand); padding: 40px 24px 44px; font-size: 14px; }
+.pp-footer__in { max-width: 1080px; margin: 0 auto; padding-left: 12px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px 40px; align-items: start; }
+.pp-footer nav { display: flex; flex-wrap: wrap; gap: 6px 22px; font-family: var(--pp-display); font-weight: 500; font-size: 18px; }
+.pp-footer nav a { text-decoration: none; }
+.pp-footer nav a:hover { color: var(--pp-pear); }
+.pp-footer p { margin: 4px 0 0; }
+.pp-footer .pp-footer__brand { margin-top: 16px; font-size: 15px; }
+.pp-footer__brand strong { font-weight: 700; }
+.pp-footer .pp-footer__contact { margin: 0; }
+.pp-footer__contact { text-align: right; opacity: .85; }
+
+/* ---- smaller screens ---------------------------------------------------- */
+@media (max-width: 760px) {
+  .pp-intro { grid-template-columns: 1fr; gap: 6px; padding-left: 6px; }
+  .pp-intro__mark { height: 150px; margin-left: 4px; }
+  .pp-intro__words { padding-bottom: 0; }
+  .pp-games-title { margin-left: 0; }
+  .pp-game { grid-template-columns: 1fr; gap: 30px; }
+  .pp-footer__in { grid-template-columns: 1fr; padding-left: 0; }
+  .pp-footer__contact { text-align: left; }
+}
+@media (max-width: 560px) {
+  body { font-size: 16px; }
+  .pp-nav { padding: 16px 18px 0; gap: 18px; }
+  .pp-page { padding: 0 18px 72px; }
+  .pp-game h3 { font-size: 28px; }
+  .pp-stores img { height: 44px; }
+}

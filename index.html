@@ -20,56 +20,74 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/site.css?v=8">
+<!-- The home page is the studio's, so it wears the studio look (studio.css)
+     instead of the game's notebook theme (site.css). The game pages never load
+     studio.css. Fredoka stands in for hand lettering of the name and headings. -->
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/studio.css?v=1">
 </head>
 <body>
 
 <header>
-  <nav class="nav">
-    <a class="nav__brand" href="/"><img src="assets/logo-pear.png" alt="">Prickle Pear Games</a>
-    <div class="nav__links">
-      <a href="/" aria-current="page">Games</a>
-      <a href="/support">Support</a>
-      <a href="/privacy">Privacy</a>
-    </div>
+  <nav class="pp-nav" aria-label="Site">
+    <a href="/support">Support</a>
+    <a href="/privacy">Privacy</a>
   </nav>
 </header>
 
-<main class="page">
-  <section class="studio-hero">
-    <img class="studio-logo" src="assets/logo-pear.png" alt="" width="358" height="498">
-    <h1>Prickle Pear Games</h1>
-    <p class="tag">Making games we love to play</p>
+<main class="pp-page">
+  <section class="pp-intro">
+    <img class="pp-intro__mark" src="assets/logo-pear.png" alt="" width="358" height="498">
+    <div class="pp-intro__words">
+      <h1>Prickle Pear Games</h1>
+      <p class="pp-intro__tag">Making games we love to play</p>
+    </div>
   </section>
 
-  <h2 class="section-title center">Our Games</h2>
-  <div class="game-grid">
+  <h2 class="pp-games-title">Our Games</h2>
 
-    <a class="card game-card" href="/doodle-defender">
-      <div class="game-card__head">
-        <img class="game-card__icon" src="assets/icon-512.png" alt="Doodle Defenders icon">
-        <div>
-          <h3>Doodle Defenders</h3>
-          <span class="badge">out now on iOS &amp; Android</span>
-        </div>
+  <!-- One .pp-game per game: its own key art, then plain text.
+       The art and the name both link to the game's page; the art link is
+       skipped by keyboard and screen readers so it isn't announced twice. -->
+  <article class="pp-game">
+    <a class="pp-game__art" href="/doodle-defender" tabindex="-1" aria-hidden="true">
+      <picture>
+        <source srcset="assets/banner.avif?v=3" type="image/avif">
+        <img src="assets/banner.png?v=3" alt="" width="1934" height="1040">
+      </picture>
+    </a>
+    <div class="pp-game__body">
+      <div class="pp-game__head">
+        <img class="pp-game__icon" src="assets/icon-512.png" alt="" width="512" height="512">
+        <h3><a href="/doodle-defender">Doodle Defenders</a></h3>
       </div>
       <p>Doodle Defenders is an action packed survival auto shooter game where you play as a simple doodle fighting to stay alive on a notebook page.</p>
-      <span class="game-card__more">Learn more →</span>
-    </a>
+      <!-- Official badges, unmodified. The Play link is tagged campaign=home so
+           Play Console can tell these taps from the game page's (game-page). -->
+      <div class="pp-stores">
+        <a href="https://apps.apple.com/us/app/doodle-defenders/id6794894322"><img src="assets/badge-app-store.svg" alt="Download on the App Store" width="120" height="40"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.pricklepeargames.doodledefender&amp;referrer=utm_source%3Dpricklepeargames.com%26utm_medium%3Dweb%26utm_campaign%3Dhome"><img src="assets/badge-google-play.png" alt="Get it on Google Play" width="478" height="142"></a>
+      </div>
+    </div>
+  </article>
 
-    <!-- Future games drop in here as another `.card.game-card` article/link. -->
-
-  </div>
-
-  <p class="brand-note">Prickle Pear Games is a brand of <strong>Prickle Pear Software,&nbsp;LLC</strong>.</p>
+  <!-- Future games drop in here as another `.pp-game`. -->
 </main>
 
-<footer class="site-footer">
-  <nav>
-    <a href="/">Home</a> · <a href="/doodle-defender">Doodle Defenders</a> · <a href="/support">Support</a> · <a href="/privacy">Privacy</a>
-  </nav>
-  <p class="legal">© 2026 Prickle Pear Software, LLC</p>
+<footer class="pp-footer">
+  <div class="pp-footer__in">
+    <div>
+      <nav aria-label="Footer">
+        <a href="/">Home</a>
+        <a href="/doodle-defender">Doodle Defenders</a>
+        <a href="/support">Support</a>
+        <a href="/privacy">Privacy</a>
+      </nav>
+      <p class="pp-footer__brand">Prickle Pear Games is a brand of <strong>Prickle Pear Software,&nbsp;LLC</strong>.</p>
+      <p>© 2026 Prickle Pear Software, LLC</p>
+    </div>
+    <p class="pp-footer__contact"><a href="mailto:support@pricklepeargames.com">support@pricklepeargames.com</a></p>
+  </div>
 </footer>
 
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "43e2d921810e40e3a6710be1513429cd"}'></script><!-- End Cloudflare Web Analytics -->
